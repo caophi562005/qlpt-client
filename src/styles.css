@@ -1,3 +1,11 @@
+/* Import CSS modules */
+@import url("./styles/tenant.css");
+@import url("./styles/tenant-contracts.css");
+@import url("./styles/tenant-rooms.css");
+@import url("./styles/admin.css");
+@import url("./styles/demo-login.css");
+@import url("./styles/not-found.css");
+
 /* Reset and Base Styles */
 * {
   margin: 0;

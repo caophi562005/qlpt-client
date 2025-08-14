@@ -1,0 +1,176 @@
+/* Admin Layout Styles */
+.admin-layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #f1f5f9;
+}
+
+.admin-navbar {
+  background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+  box-shadow: 0 4px 20px rgba(30, 41, 59, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.admin-navbar .navbar-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 70px;
+}
+
+.admin-navbar .brand-link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+  color: white;
+  font-weight: 600;
+  font-size: 1.25rem;
+}
+
+.admin-navbar .brand-icon {
+  font-size: 1.5rem;
+}
+
+.admin-navbar .navbar-menu {
+  display: flex;
+  gap: 2rem;
+}
+
+.admin-navbar .nav-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.9);
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.admin-navbar .nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+.admin-navbar .nav-link.active {
+  background-color: rgba(255, 255, 255, 0.15);
+  color: white;
+}
+
+.admin-navbar .navbar-user {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.admin-navbar .user-info {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.admin-navbar .user-avatar.admin {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.admin-navbar .user-details {
+  display: flex;
+  flex-direction: column;
+  color: white;
+}
+
+.admin-navbar .user-name {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.admin-navbar .user-role {
+  font-size: 0.8rem;
+  opacity: 0.8;
+}
+
+.admin-navbar .logout-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: none;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.admin-navbar .logout-btn:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.admin-main {
+  flex: 1;
+  padding: 2rem 0;
+}
+
+.admin-main .main-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.admin-footer {
+  background-color: #1e293b;
+  color: white;
+  padding: 1rem 0;
+  text-align: center;
+}
+
+.admin-footer .footer-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Admin Dashboard Enhancements */
+.admin-layout .dashboard-header h1 {
+  background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.admin-layout .dashboard-card {
+  border-left: 4px solid #f59e0b;
+}
+
+.admin-layout .btn-primary {
+  background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+}
+
+.admin-layout .btn-primary:hover {
+  box-shadow: 0 4px 15px rgba(30, 41, 59, 0.3);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .admin-navbar .navbar-menu {
+    display: none;
+  }
+}

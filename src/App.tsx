@@ -7,16 +7,22 @@ import {
 } from "react-router-dom";
 import { AuthProvider, useAuth } from "./context/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
-import Layout from "./components/Layout";
+import AdminLayout from "./components/AdminLayout";
+import TenantLayout from "./components/TenantLayout";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import DemoLogin from "./pages/DemoLogin";
+import NotFound from "./pages/NotFound";
 import Dashboard from "./pages/Dashboard";
 import Rooms from "./pages/Rooms";
 import Contracts from "./pages/Contracts";
+import TenantDashboard from "./pages/tenant/TenantDashboard";
+import TenantContracts from "./pages/tenant/TenantContracts";
+import TenantRooms from "./pages/tenant/TenantRooms";
 import "./styles.css";
 
 const AppContent: React.FC = () => {
-  const { isAuthenticated, isLoading } = useAuth();
+  const { isAuthenticated, isLoading, user } = useAuth();
 
   if (isLoading) {
     return (
@@ -29,45 +35,139 @@ const AppContent: React.FC = () => {
 
   return (
     <Routes>
+      <Route path="/demo" element={<DemoLogin />} />
       <Route
         path="/login"
-        element={!isAuthenticated ? <Login /> : <Navigate to="/" replace />}
+        element={
+          !isAuthenticated ? (
+            <Login />
+          ) : (
+            <Navigate
+              to={user?.role === "TENANT" ? "/tenant" : "/admin"}
+              replace
+            />
+          )
+        }
       />
       <Route
         path="/register"
-        element={!isAuthenticated ? <Register /> : <Navigate to="/" replace />}
+        element={
+          !isAuthenticated ? (
+            <Register />
+          ) : (
+            <Navigate
+              to={user?.role === "TENANT" ? "/tenant" : "/admin"}
+              replace
+            />
+          )
+        }
       />
+
+      {/* Admin Routes */}
+      <Route
+        path="/admin"
+        element={
+          <ProtectedRoute>
+            {user?.role === "OWNER" ? (
+              <AdminLayout>
+                <Dashboard />
+              </AdminLayout>
+            ) : (
+              <Navigate to="/tenant" replace />
+            )}
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/admin/rooms"
+        element={
+          <ProtectedRoute>
+            {user?.role === "OWNER" ? (
+              <AdminLayout>
+                <Rooms />
+              </AdminLayout>
+            ) : (
+              <Navigate to="/tenant" replace />
+            )}
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/admin/contracts"
+        element={
+          <ProtectedRoute>
+            {user?.role === "OWNER" ? (
+              <AdminLayout>
+                <Contracts />
+              </AdminLayout>
+            ) : (
+              <Navigate to="/tenant" replace />
+            )}
+          </ProtectedRoute>
+        }
+      />
+
+      {/* Tenant Routes */}
+      <Route
+        path="/tenant"
+        element={
+          <ProtectedRoute>
+            {user?.role === "TENANT" ? (
+              <TenantLayout>
+                <TenantDashboard />
+              </TenantLayout>
+            ) : (
+              <Navigate to="/admin" replace />
+            )}
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/tenant/contracts"
+        element={
+          <ProtectedRoute>
+            {user?.role === "TENANT" ? (
+              <TenantLayout>
+                <TenantContracts />
+              </TenantLayout>
+            ) : (
+              <Navigate to="/admin" replace />
+            )}
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/tenant/rooms"
+        element={
+          <ProtectedRoute>
+            {user?.role === "TENANT" ? (
+              <TenantLayout>
+                <TenantRooms />
+              </TenantLayout>
+            ) : (
+              <Navigate to="/admin" replace />
+            )}
+          </ProtectedRoute>
+        }
+      />
+
+      {/* Default redirect based on user role */}
       <Route
         path="/"
         element={
-          <ProtectedRoute>
-            <Layout>
-              <Dashboard />
-            </Layout>
-          </ProtectedRoute>
+          <Navigate
+            to={
+              isAuthenticated
+                ? user?.role === "TENANT"
+                  ? "/tenant"
+                  : "/admin"
+                : "/demo"
+            }
+            replace
+          />
         }
       />
-      <Route
-        path="/rooms"
-        element={
-          <ProtectedRoute>
-            <Layout>
-              <Rooms />
-            </Layout>
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path="/contracts"
-        element={
-          <ProtectedRoute>
-            <Layout>
-              <Contracts />
-            </Layout>
-          </ProtectedRoute>
-        }
-      />
-      <Route path="*" element={<Navigate to="/" replace />} />
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 };

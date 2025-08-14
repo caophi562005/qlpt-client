@@ -8,7 +8,6 @@ import {
   Users,
   DollarSign,
   TrendingUp,
-  Plus,
 } from "lucide-react";
 
 const Dashboard: React.FC = () => {
@@ -181,29 +180,6 @@ const Dashboard: React.FC = () => {
               </span>
             </div>
           </div>
-        </div>
-      </div>
-
-      {/* Quick Actions */}
-      <div className="quick-actions">
-        <h2>Thao tác nhanh</h2>
-        <div className="action-cards">
-          <Link to="/rooms" className="action-card">
-            <Building size={20} />
-            <span>Quản lý phòng</span>
-          </Link>
-          <Link to="/contracts" className="action-card">
-            <FileText size={20} />
-            <span>Quản lý hợp đồng</span>
-          </Link>
-          <Link to="/rooms?action=create" className="action-card primary">
-            <Plus size={20} />
-            <span>Thêm phòng mới</span>
-          </Link>
-          <Link to="/contracts?action=create" className="action-card primary">
-            <Plus size={20} />
-            <span>Tạo hợp đồng mới</span>
-          </Link>
         </div>
       </div>
 
